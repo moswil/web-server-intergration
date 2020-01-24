@@ -4,6 +4,11 @@ from flask import Flask, jsonify, make_response, request
 app = Flask(__name__)
 
 
+@app.route('/')
+def index():
+    return jsonify({'message': 'welcome home'})
+
+
 @app.route('/mpesa/b2c/v1', methods=['POST'])
 def listen_b2c():
     # save data
@@ -52,4 +57,3 @@ def lnm_query_request():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
