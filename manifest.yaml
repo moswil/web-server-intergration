@@ -1,0 +1,4 @@
+applications:
+  - name: MpesaAPIHandlers
+    random-route: true
+    memory: 128M
