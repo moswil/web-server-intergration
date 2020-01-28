@@ -1,7 +1,12 @@
+import os
+
 from flask import Flask, jsonify, make_response, request
+
+from utils.get_logger import get_logger
 
 
 app = Flask(__name__)
+logger = get_logger(os.path.basename(__file__))
 
 
 @app.route('/')
@@ -15,7 +20,7 @@ def listen_b2c():
     request_data = request.data
 
     # perform your processing here, e.g., printing it out
-    print(request_data)
+    logger.info(request_data)
 
     # prepare the response, assuming no errors have occurred. Any response
 
@@ -35,7 +40,9 @@ def listen_b2c():
 @app.route('/mpesa/b2b/v1')
 def listen_b2b():
     request_data = request.data
-    print(request_data)
+
+    logger.info(request_data)
+
     message = {
         "ResultCode": 0,
         "ResultDesc": "The service was accepted successfully",
