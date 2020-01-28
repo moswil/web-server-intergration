@@ -11,6 +11,7 @@ logger = get_logger(os.path.basename(__file__))
 
 @app.route('/')
 def index():
+    logger.info('Message form home: "welcome"')
     return jsonify({'message': 'welcome home'})
 
 
@@ -52,9 +53,36 @@ def listen_b2b():
     return jsonify({'message': message}), 200
 
 
-@app.route('/mpesa/lnm/v1/online-payment')
+@app.route('/mpesa/lnm/v1/online-payment', methods=['POST'])
 def lnm_online_payment():
-    pass
+    request_data = request.data
+
+    logger.info('MPESA ONLINE PAYMENT')
+    logger.info(request_data)
+
+    message = {
+        "ResultCode": 0,
+        "ResultDesc": "The service was accepted successfully",
+        "ThirdPartyTransID": "1234567890"
+    }
+
+    return jsonify({'message': message}), 200
+
+
+@app.route('/mpesa/lnm/v1/online-payment/timeout', methods=['POST'])
+def lnm_online_payment_timeout():
+    request_data = request.data
+
+    logger.info('MPESA ONLINE PAYMENT TIMEOUT')
+    logger.info(request_data)
+
+    message = {
+        "ResultCode": 0,
+        "ResultDesc": "The service was accepted successfully",
+        "ThirdPartyTransID": "1234567890"
+    }
+
+    return jsonify({'message': message}), 200
 
 
 @app.route('/mpesa/lnm/v1/query-request')
